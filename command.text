@@ -1,0 +1,143 @@
+docker ps
+docker ps -a
+
+docker image ls
+
+# Containers remove
+docker rm [Container names]
+
+
+# If port expose ()
+docker run -p 3000:3000  [imageName]
+ 1. 3000 -> is expose port  
+ 2. 3000 ->  is internal               
+
+#detatch if you want free terminal 
+docker  run -d -p 3000:3000  [imageName]
+
+#if you want autoremove Containers when you stop the Containers
+docker run -d --rm -p 3000:3000  [imageName]
+
+# if you want to stop Containers
+docker stop [imageName]
+
+# if you want user own name for Containers name
+docker run -d --rm --name "hello1" -p 3000:3000  [imageName]
+docker run --name "hello1" -p 3000:3000  [imageName]
+-- both command is working
+
+#if you want create taging with build
+docker build -t myApp:01 .
+
+#if remove image 
+docker rmi myApp:01
+
+docker run -d --rm --name "hello1" -p 3000:3000  myApp:01
+
+#rename the image name
+docker tag [oldname]:[tag name] [newname][tag]
+
+
+#if you want to share own docker image    [after login on browser -> create a name ]
+1. login docker -> docker login
+2. if you have same name than push
+
+
+
+# if you create a volume 
+docker run -v myvolume:/[workdir]/ [imageName]
+
+# vloume check 
+docker volume ls
+
+docker volume inspect myvolume
+
+
+docker run v /folderPath:/workdir/ --rm imagename
+
+
+docker run v /Users/himanshurajput/WorkSpace/black-structure-nestjs:/blackStudio/ -rm 
+
+# internal connection if you have host same machine
+host.docker.internal 
+
+# docker compose
+docker-compose un
+docker-compose down
+
+#if you want to run docker compose in detach mode
+docker-compose up -d
+
+
+#if you want run a docker compose sprated service 
+docker-compose run [serviceName]
+
+#if you want to delete every thing on docker compose time 
+docker-compose down -v
+
+
+== How to delete port ==
+lsof -i tcp:8081 kill -9 <PID >
+==============
+
+docker build -t DOCKER-NAME .
+
+docker images
+
+Docker run -p 80:80  DOCKER-NAME
+
+If error is :- 
+How do I disable the "Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them" output when running docker build?
+
+Answer:- export DOCKER_SCAN_SUGGEST=false
+
+
+Docker DOCs
+======================================================
+
+========= find the docker list ============
+-> docker container ls
+-> docker volume ls
+
+========= remove docker ============= docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+ 
+-> docker volume rm [VOLUMENAME]
+-> docker container rm [CONTAINERNAME]
+
+-> docker system prune -a
+-> docker system prune
+-> docker system prune --volumes
+-> docker container prune
+
+========== How to Do a Clean Restart of a Docker Instance ===================
+
+Stop the container(s) using the following command:
+-> docker-compose down
+Delete all containers using the following command:
+-> docker rm -f $(docker ps -a -q)
+Delete all volumes using the following command:
+-> docker volume rm $(docker volume ls -q)
+Restart the containers using the following command:
+-> docker-compose up -d
+
+=======================================================================
+
+// How to setup postgres sql on Docker
+-> docker run -p 5050:80  -e "PGADMIN_DEFAULT_EMAIL=himanshu.rajput@claritusconsulting.com" -e "PGADMIN_DEFAULT_PASSWORD=New@1020"  -d dpage/pgadmin4
+
+
+** Find the docker details **
+-> docker inspect NAME|ID 
+          YA
+-> docker inspect CONTAINER_ID
+
+================ Redis connect with docker ====================
+redis-cli -h "[Docker container IP]"
+
+
+=============== Remove docker images ==================
+docker rmi -f $(docker images -aq)
+
+
+aws sts get-session-token --serial-number arn-of-the-mfa-device --token-code code-from-token

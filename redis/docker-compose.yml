@@ -1,0 +1,13 @@
+redis:
+  image: redis
+  environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+  container_name: redis
+  command: redis-server /usr/local/etc/redis/redis.conf
+  ports:
+    - "6379:6379"
+  volumes:
+    - ./data:/data
+    - ./redis.conf:/usr/local/etc/redis/redis.conf
